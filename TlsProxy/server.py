@@ -83,7 +83,7 @@ def ACAM():
 
 def handle_exception(loop, context):
     ''' TODO: implement a user-specified exception handler '''
-    pass
+    print(context)
 
 def entry():
     global conf, new_key, ctx

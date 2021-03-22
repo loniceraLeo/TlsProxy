@@ -4,6 +4,8 @@
     warnning: python3.7+ needed '''
 
 import asyncio
+from logging import debug
+import os
 import socket
 import ssl
 
@@ -40,8 +42,8 @@ async def process_stream(rd: asyncio.StreamReader,
 
 async def stream_copy(reader: asyncio.StreamReader, 
     writer: asyncio.StreamWriter, toggle=False):
+    first = 0
     try:
-        first = 0
         while True:
             data, first = mask(await reader.read(8192), \
                     new_key, first)
@@ -52,9 +54,12 @@ async def stream_copy(reader: asyncio.StreamReader,
             writer.write(data)
             await writer.drain()
     except:
-        if writer:
-            writer.close()
-        return
+        try:
+            if writer:
+                writer.close()
+            return
+        except:
+            return
 
 async def check_valid(reader: asyncio.StreamReader) -> bool:
     ''' the server side create a recipe 
@@ -75,11 +80,12 @@ async def main():
 
     ''' no event-loop exception warning.
         it will be optional in the future '''
+    global loop
     loop = asyncio.get_running_loop()
     loop.set_exception_handler(nop)
-
+        
     async with server:
-        await server.serve_forever()
+            await server.serve_forever()
 
 def entry():
     global conf, new_key, ctx
@@ -91,8 +97,9 @@ def entry():
         ctx.check_hostname = False
         
         asyncio.run(main())
-    except KeyboardInterrupt or RuntimeError:
-        exit(1)
+    
+    except KeyboardInterrupt:
+        loop.shutdown_asyncgens()
 
 if __name__ == '__main__':
-    nop()
+    entry()
