@@ -4,7 +4,6 @@
     warnning: python3.7+ needed '''
 
 import asyncio
-from logging import debug
 import os
 import socket
 import ssl
