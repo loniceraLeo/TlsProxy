@@ -80,9 +80,6 @@ def ACAM():
     '''TODO: implement a automaton for searching '''
     pass
 
-def test_extract():
-    pass
-
 def handle_exception(loop, context):
     ''' TODO: implement a user-specified exception handler '''
     pass
