@@ -6,6 +6,8 @@ setup(
     packages = ['TlsProxy'],
     entry_points = {
         'console_scripts':
-            ['tpserver=TlsProxy.server:entry']
+            [
+                'tpserver = TlsProxy.server:entry',
+                'tpclient = TlsProxy.client:entry']
     }
 )

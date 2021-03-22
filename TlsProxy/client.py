@@ -80,7 +80,7 @@ async def main():
     async with server:
         await server.serve_forever()
 
-if __name__ == '__main__':
+def entry():
     global conf, new_key, ctx
 
     conf = config.get_config(CLIENT_SIDE)
@@ -89,3 +89,6 @@ if __name__ == '__main__':
     ctx.check_hostname = False
 
     asyncio.run(main())
+
+if __name__ == '__main__':
+    nop()
