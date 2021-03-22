@@ -8,6 +8,7 @@ setup(
         'console_scripts':
             [
                 'tpserver = TlsProxy.server:entry',
-                'tpclient = TlsProxy.client:entry']
+                'tpclient = TlsProxy.client:entry'
+            ]
     }
 )

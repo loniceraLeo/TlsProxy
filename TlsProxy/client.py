@@ -7,8 +7,8 @@ import asyncio
 import socket
 import ssl
 from TlsProxy import config
-from .config import CLIENT_SIDE
-from .utils import *
+from TlsProxy.config import CLIENT_SIDE
+from TlsProxy.utils import *
 
 def nop(*args, **kwargs):
     pass
@@ -83,12 +83,18 @@ async def main():
 def entry():
     global conf, new_key, ctx
 
-    conf = config.get_config(CLIENT_SIDE)
-    new_key = hashed_key(conf['password'].encode())
-    ctx = ssl.create_default_context(ssl.Purpose.SERVER_AUTH)
-    ctx.check_hostname = False
-
-    asyncio.run(main())
+    try:
+        conf = config.get_config(CLIENT_SIDE)
+        new_key = hashed_key(conf['password'].encode())
+        ctx = ssl.create_default_context(ssl.Purpose.SERVER_AUTH)
+        ctx.check_hostname = False
+        
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        exit(1)
 
 if __name__ == '__main__':
-    nop()
+    try:
+        entry()
+    except KeyboardInterrupt:
+        pass

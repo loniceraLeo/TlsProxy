@@ -90,12 +90,16 @@ def handle_exception(loop, context):
 def entry():
     global conf, new_key, ctx
 
-    conf = config.get_config(SERVER_SIDE)
-    new_key = hashed_key(conf['password'])
-    ctx = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
-    ctx.load_cert_chain(conf['certificate'], conf['private-key'])
-    asyncio.run(main())
-    print('oops')
+    try:
+        conf = config.get_config(SERVER_SIDE)
+        new_key = hashed_key(conf['password'])
+        ctx = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
+        ctx.load_cert_chain(conf['certificate'], conf['private-key'])
+
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        exit(1)
+    
 
 if __name__ == '__main__':
     nop()

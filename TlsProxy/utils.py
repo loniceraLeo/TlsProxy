@@ -54,23 +54,6 @@ def padding(addr: bytes, padding_length: int) -> bytes:
     payload.extend(pads)
     return payload
 
-def padding_test():
-    results = []
-    results.extend([
-        padding(b'                 <blank-url>                  ', 16),
-        padding(b'abcdefyoutubeghijklmnopqrstwitteruvwxyz.abcdefghijklmn\
-                  opqrstuvwxyoutubez.abcdefacebookghijklmnopixivqredditu\
-                  vwxyz.com', 64),
-        padding(b'wwwa.youtubea.coma', 256),
-        padding(b'aaaaaaaaaa.twitter.coommm', 256),
-        padding(b'iiiiiiiiiiiiii.vvvvvvv.cdefghi', 256),
-        padding(b'there-is-always-a-hope-if-u-never-give-up.faith', 256),
-        padding(b'abcdefghijklmnopqrstuvwxyz.none.tao.use', 256),
-        padding(b'www.google.com', 256),
-        padding(b'no-mercy.sometimes-naive.com.cn')
-    ])
-    print(len(results[0]))
-
 def is_valid_address_test(host, port):
     print(is_valid_address(host, port))
 

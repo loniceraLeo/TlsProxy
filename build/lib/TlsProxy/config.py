@@ -22,6 +22,8 @@ def get_config(*args) -> dict:
     for name in files:
         if name == 'config.json':
             config = read_config()
+            if not 'private_key' in config and args[0] == SERVER_SIDE:
+                raise ValueError('not server config')
             return config
     return create_config(args[0])
 
