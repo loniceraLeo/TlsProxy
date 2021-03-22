@@ -5,6 +5,7 @@
 import asyncio
 import socket
 import ssl
+
 from TlsProxy import config
 from .config import SERVER_SIDE
 from .utils import *
@@ -80,9 +81,6 @@ def ACAM():
     '''TODO: implement a automaton for searching '''
     pass
 
-def test_extract():
-    pass
-
 def handle_exception(loop, context):
     ''' TODO: implement a user-specified exception handler '''
     pass
@@ -97,7 +95,7 @@ def entry():
         ctx.load_cert_chain(conf['certificate'], conf['private-key'])
 
         asyncio.run(main())
-    except KeyboardInterrupt:
+    except KeyboardInterrupt or RuntimeError:
         exit(1)
     
 

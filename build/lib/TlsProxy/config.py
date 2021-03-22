@@ -97,7 +97,6 @@ def generate_key_cert(key_file, cert_file, *, format: str=None) -> None:
 
 def search_recursively(dir: str) -> str:
     files = os.listdir(dir)
-    print(files)
     for file_name in files:
         if file_name == 'config.json':
             with open(dir+'/'+file_name) as f:

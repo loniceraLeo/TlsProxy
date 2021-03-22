@@ -6,6 +6,7 @@
 import asyncio
 import socket
 import ssl
+
 from TlsProxy import config
 from TlsProxy.config import CLIENT_SIDE
 from TlsProxy.utils import *
@@ -90,11 +91,8 @@ def entry():
         ctx.check_hostname = False
         
         asyncio.run(main())
-    except KeyboardInterrupt:
+    except KeyboardInterrupt or RuntimeError:
         exit(1)
 
 if __name__ == '__main__':
-    try:
-        entry()
-    except KeyboardInterrupt:
-        pass
+    nop()

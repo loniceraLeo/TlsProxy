@@ -1,5 +1,10 @@
 #! python3
-''' utils for tunneling '''
+''' a set of useful utils '''
+
+'''
+    TODO: random padding length
+    TODO: hash algorithms switch
+'''
 
 import random
 import sys
