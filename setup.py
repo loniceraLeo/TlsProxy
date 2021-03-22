@@ -1,11 +1,11 @@
 from setuptools import setup
 
 setup(
-    name = 'TLS-Proxy',
+    name = 'TlsProxy',
     version = '0.2.0',
-    packages = ['TLS-Proxy'],
+    packages = ['TlsProxy'],
     entry_points = {
         'console_scripts':
-            ['tpserver=TLS-Proxy:server']
+            ['tpserver=TlsProxy.server:entry']
     }
 )

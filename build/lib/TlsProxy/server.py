@@ -5,9 +5,9 @@
 import asyncio
 import socket
 import ssl
-from TlsProxy import config
-from .config import SERVER_SIDE
-from .utils import *
+import config
+from config import SERVER_SIDE
+from utils import *
 
 def nop(*args, **kwargs):
     pass
@@ -96,6 +96,6 @@ def entry():
     ctx.load_cert_chain(conf['certificate'], conf['private-key'])
     asyncio.run(main())
     print('oops')
-
+    
 if __name__ == '__main__':
     nop()
