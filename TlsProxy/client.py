@@ -4,9 +4,10 @@
     warnning: python3.7+ needed '''
 
 import asyncio
-import os
+from os import write
 import socket
 import ssl
+import sys
 
 from TlsProxy import config
 from TlsProxy.config import CLIENT_SIDE
@@ -16,7 +17,7 @@ def nop(*args, **kwargs):
     pass
 
 async def process_stream(rd: asyncio.StreamReader, 
-                        wt: asyncio.StreamWriter):
+        wt: asyncio.StreamWriter):
     data = await rd.read(4096)
     raw_addr = data.split(b' ')[1]
     padded_addr = padding(raw_addr, conf['padding-length'])
@@ -37,7 +38,8 @@ async def process_stream(rd: asyncio.StreamReader,
     wt.write(b'HTTP/1.1 200 Connection Established\r\n\r\n')
     await wt.drain()
     await asyncio.gather(stream_copy(rd, rmt_wt), 
-                            stream_copy(rmt_rd, wt))
+                            stream_copy(rmt_rd, wt),
+                            return_exceptions=True)
 
 async def stream_copy(reader: asyncio.StreamReader, 
     writer: asyncio.StreamWriter, toggle=False):
@@ -47,14 +49,14 @@ async def stream_copy(reader: asyncio.StreamReader,
             data, first = mask(await reader.read(8192), \
                     new_key, first)
             if data == b'':
-                if writer:
+                if writer is not None:
                     writer.close()
                 return
             writer.write(data)
             await writer.drain()
     except:
         try:
-            if writer:
+            if writer is not None:
                 writer.close()
             return
         except:
@@ -62,14 +64,22 @@ async def stream_copy(reader: asyncio.StreamReader,
 
 async def check_valid(reader: asyncio.StreamReader) -> bool:
     ''' the server side create a recipe 
-        Deprecated: useless function.'''
+        Deprecated: useless function.
+    '''
     token = await reader.read(4096)
     token, _ = mask(token, new_key)
     if token == b'Connection Established':
         return True
     return False
 
+def destory_conns(conns: list):
+    for writer in conns:
+        del writer.transport
+
 async def main():
+ #try:
+    global server
+
     server = await asyncio.start_server(process_stream,
         host=conf['local_host'], port=conf['local_port'])
     ''' TODO: use logging module in the future '''
@@ -79,26 +89,35 @@ async def main():
 
     ''' no event-loop exception warning.
         it will be optional in the future '''
-    global loop
+
     loop = asyncio.get_running_loop()
     loop.set_exception_handler(nop)
-        
+    no_check(loop)
+
     async with server:
             await server.serve_forever()
 
 def entry():
-    global conf, new_key, ctx
+    global new_key, ctx, conf, rmt_conns
 
     try:
         conf = config.get_config(CLIENT_SIDE)
         new_key = hashed_key(conf['password'].encode())
         ctx = ssl.create_default_context(ssl.Purpose.SERVER_AUTH)
         ctx.check_hostname = False
+        rmt_conns = []
         
         asyncio.run(main())
-    
     except KeyboardInterrupt:
-        loop.shutdown_asyncgens()
+        print('exit')
+        exit(1)
+
+def no_check(loop: asyncio.AbstractEventLoop):
+    '''XXX not safe!
+    we override a private method of event loop to avoid raising exception
+    consider constructing a sub-class of event-Loop?
+    '''
+    loop._check_closed = nop
 
 if __name__ == '__main__':
     entry()
