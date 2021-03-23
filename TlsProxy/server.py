@@ -3,7 +3,6 @@
     server-side of TLS-Proxy '''
 
 import asyncio
-import socket
 import ssl
 
 from TlsProxy import config
