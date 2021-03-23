@@ -1,10 +1,8 @@
 #! python3
 ''' Author: github.com/loniceraLeo
-
 '''
 
 import asyncio
-from os import write
 import ssl
 
 from TlsProxy import config
