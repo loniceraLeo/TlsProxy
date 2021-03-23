@@ -7,7 +7,6 @@ import asyncio
 from os import write
 import socket
 import ssl
-import sys
 
 from TlsProxy import config
 from TlsProxy.config import CLIENT_SIDE
