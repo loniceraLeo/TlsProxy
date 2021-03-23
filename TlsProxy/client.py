@@ -5,7 +5,7 @@
 import asyncio
 import ssl
 
-from TlsProxy import config
+from TlsProxy import config, flags
 from TlsProxy.config import CLIENT_SIDE
 from TlsProxy.utils import *
 

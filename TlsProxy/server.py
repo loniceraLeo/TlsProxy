@@ -5,7 +5,7 @@
 import asyncio
 import ssl
 
-from TlsProxy import config
+from TlsProxy import config, flags
 from TlsProxy.config import SERVER_SIDE
 from TlsProxy.utils import *
 
@@ -75,8 +75,9 @@ async def main():
 
 def init():
     if not check_python_version(3, 7, 0):
-        ''' the asyncio api needs python3.7+ '''
         raise ValueError('python version not support')
+
+    flags.parse()
 
 def handle_exception(loop, context):
     ''' TODO: implement a user-specified exception handler '''
