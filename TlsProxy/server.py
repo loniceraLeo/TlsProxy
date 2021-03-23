@@ -1,14 +1,13 @@
 #! python3
-''' Author: github.com/loniceraleo
-    server-side of TLS-Proxy 
+''' Author: github.com/loniceraLeo 
 '''
 
 import asyncio
 import ssl
 
 from TlsProxy import config
-from .config import SERVER_SIDE
-from .utils import *
+from TlsProxy.config import SERVER_SIDE
+from TlsProxy.utils import *
 
 def nop(*args, **kwargs):
     pass

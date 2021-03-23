@@ -1,15 +1,11 @@
 #! python3
-'''
-    Author: github.com/loniceraleo
-    TLS-Proxy will use a existing config file in the case of
-    finding it in this dictionary.Otherwise it creates a new one.
+''' Author: github.com/loniceraLeo
 '''
 
 import os
 import json
 import ssl
 from os import system as sys_call
-from hashlib import blake2b
 
 SERVER_SIDE = 0x0
 CLIENT_SIDE = 0x1

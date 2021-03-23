@@ -1,11 +1,9 @@
 #! python3
-''' Author: github.com/loniceraleo
-    client-side of TLS-Proxy 
-    warnning: python3.7+ needed '''
+''' Author: github.com/loniceraLeo
+'''
 
 import asyncio
 from os import write
-import socket
 import ssl
 
 from TlsProxy import config
@@ -73,7 +71,7 @@ async def check_valid(reader: asyncio.StreamReader) -> bool:
 
 def destory_conns(conns: list):
     for writer in conns:
-        del writer.transport
+        writer.transport.close()
 
 async def main():
     global server
@@ -111,8 +109,9 @@ def entry():
 
 def no_check(loop: asyncio.AbstractEventLoop):
     '''XXX not safe!
-    we override a private method of event loop to avoid raising exception
-    consider constructing a sub-class of event-Loop?
+    we override a private method of event-loop to avoid raising exception
+    after keyboardInterrupte.
+    consider constructing a sub-class of asyncio.AbstractEventLoop?
     '''
     loop._check_closed = nop
 
