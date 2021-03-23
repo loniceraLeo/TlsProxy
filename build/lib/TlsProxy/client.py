@@ -7,7 +7,6 @@ import asyncio
 from os import write
 import socket
 import ssl
-import sys
 
 from TlsProxy import config
 from TlsProxy.config import CLIENT_SIDE
@@ -77,7 +76,6 @@ def destory_conns(conns: list):
         del writer.transport
 
 async def main():
- #try:
     global server
 
     server = await asyncio.start_server(process_stream,
@@ -110,7 +108,6 @@ def entry():
         asyncio.run(main())
     except KeyboardInterrupt:
         print('exit')
-        exit(1)
 
 def no_check(loop: asyncio.AbstractEventLoop):
     '''XXX not safe!
