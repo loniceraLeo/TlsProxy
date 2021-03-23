@@ -76,7 +76,6 @@ def destory_conns(conns: list):
         del writer.transport
 
 async def main():
- #try:
     global server
 
     server = await asyncio.start_server(process_stream,
@@ -109,7 +108,6 @@ def entry():
         asyncio.run(main())
     except KeyboardInterrupt:
         print('exit')
-        exit(1)
 
 def no_check(loop: asyncio.AbstractEventLoop):
     '''XXX not safe!

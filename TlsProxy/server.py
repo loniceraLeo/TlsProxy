@@ -68,6 +68,7 @@ async def main():
         it will be optional in the future '''
     loop = asyncio.get_running_loop()
     loop.set_exception_handler(nop)
+    no_check(loop)
 
     async with server:
         await server.serve_forever()
@@ -76,10 +77,6 @@ def init():
     if not check_python_version(3, 7, 0):
         ''' the asyncio api needs python3.7+ '''
         raise ValueError('python version not support')
-
-def ACAM():
-    '''TODO: implement a automaton for searching '''
-    pass
 
 def handle_exception(loop, context):
     ''' TODO: implement a user-specified exception handler '''
@@ -95,9 +92,13 @@ def entry():
         ctx.load_cert_chain(conf['certificate'], conf['private-key'])
 
         asyncio.run(main())
-    except KeyboardInterrupt or RuntimeError:
+    except KeyboardInterrupt:
         exit(1)
-    
+
+def no_check(loop: asyncio.AbstractEventLoop):
+    '''XXX not safe
+    '''
+    loop._check_closed = nop
 
 if __name__ == '__main__':
     nop()
