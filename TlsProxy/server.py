@@ -1,6 +1,7 @@
 #! python3
 ''' Author: github.com/loniceraleo
-    server-side of TLS-Proxy '''
+    server-side of TLS-Proxy 
+'''
 
 import asyncio
 import ssl
@@ -14,7 +15,8 @@ def nop(*args, **kwargs):
 
 async def process(rd: asyncio.StreamReader, wt: asyncio.StreamWriter):
     ''' we shouldn't use ssl mode because the http proxy
-    transports the encrypted data in the tunnel. '''
+    transports the encrypted data in the tunnel. 
+    '''
     data = await rd.read(256)
     raw_adr, _ = mask(data, new_key)
     adr = extract_address(raw_adr)
@@ -63,8 +65,8 @@ async def main():
     host=conf['server'], port=conf['port'],
     ssl=ctx, ssl_handshake_timeout=30)
 
-    ''' no event-loop exception warning.
-        it will be optional in the future '''
+    '''XXX no event-loop exception warning.
+    it will be optional in the future '''
     loop = asyncio.get_running_loop()
     loop.set_exception_handler(nop)
     no_check(loop)
