@@ -79,7 +79,7 @@ def init():
 
 def handle_exception(loop, context):
     ''' TODO: implement a user-specified exception handler '''
-    print(context)
+    pass
 
 def entry():
     global conf, new_key, ctx
