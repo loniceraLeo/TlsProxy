@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name = 'TlsProxy',
-    version = '0.2.0',
+    version = '0.8.0',
     descriptor = 'a safe http proxy over tls',
     long_description = 'README.md',
     author = 'github.com/loniceraLeo',

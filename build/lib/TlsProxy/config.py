@@ -18,7 +18,7 @@ def get_config(*args) -> dict:
     for name in files:
         if name == 'config.json':
             config = read_config(name)
-            if not 'private_key' in config and args[0] == SERVER_SIDE:
+            if not 'private-key' in config and args[0] == SERVER_SIDE:
                 raise ValueError('not server config')
             return config
     return create_config(args[0])
@@ -100,6 +100,7 @@ def search_recursively(dir: str, filename: str) -> str:
         if file == filename:
             with open(dir+'/'+file) as f:
                 data = json.loads(f.read())
+                os.chdir(dir)
                 return data
         if is_dir(file):
             return search_recursively(dir+'/'+file, filename)

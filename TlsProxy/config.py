@@ -100,6 +100,7 @@ def search_recursively(dir: str, filename: str) -> str:
         if file == filename:
             with open(dir+'/'+file) as f:
                 data = json.loads(f.read())
+                os.chdir(dir)
                 return data
         if is_dir(file):
             return search_recursively(dir+'/'+file, filename)
