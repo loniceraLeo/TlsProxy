@@ -1,13 +1,13 @@
-#! python3
+#!/usr/bin/env python3
 ''' Author: github.com/loniceraLeo 
 '''
 
 import asyncio
 import ssl
 
-import config, flags
-from config import SERVER_SIDE
-from utils import *
+from TlsProxy import config, flags
+from TlsProxy.config import SERVER_SIDE
+from TlsProxy.utils import *
 
 def nop(*args, **kwargs):
     pass
@@ -79,7 +79,7 @@ def init():
     conf = flags.parse()
     if conf is None:
             conf = config.get_config(SERVER_SIDE)
-    new_key = hashed_key(conf['password'])
+    new_key = hashed_key(conf['password'].encode())
     ctx = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
     ctx.load_cert_chain(conf['certificate'], conf['private-key'])
 

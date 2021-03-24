@@ -1,10 +1,10 @@
-Metadata-Version: 1.0
+Metadata-Version: 1.2
 Name: TlsProxy
 Version: 0.2.0
 Summary: UNKNOWN
 Home-page: https://www.github.com/loniceraLeo/TlsProxy
 Author: github.com/loniceraLeo
-Author-email: UNKNOWN
 License: GPL
 Description: README.md
 Platform: UNKNOWN
+Requires-Python: >=2.0.0

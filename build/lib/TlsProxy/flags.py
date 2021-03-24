@@ -1,11 +1,11 @@
-#! python3
+#!/usr/bin/env python3
 ''' Author: github.com/loniceraLeo
 '''
 
 import os
 import sys
 
-import config
+from TlsProxy import config
 
 def nop(*args, **kwargs):
     pass

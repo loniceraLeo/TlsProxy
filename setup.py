@@ -8,6 +8,7 @@ setup(
     author = 'github.com/loniceraLeo',
     url = 'https://www.github.com/loniceraLeo/TlsProxy',
     packages = ['TlsProxy'],
+    python_requires = '>=3.6.0',
     license = 'GPL',
     entry_points = {
         'console_scripts':

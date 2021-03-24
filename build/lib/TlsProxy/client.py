@@ -1,4 +1,4 @@
-#! python3
+#!/usr/bin/env python3
 ''' Author: github.com/loniceraLeo
 '''
 
@@ -6,9 +6,9 @@ import asyncio
 import ssl
 
 
-import config, flags
-from config import CLIENT_SIDE
-from utils import *
+from TlsProxy import config, flags
+from TlsProxy.config import CLIENT_SIDE
+from TlsProxy.utils import *
 
 def nop(*args, **kwargs):
     pass
