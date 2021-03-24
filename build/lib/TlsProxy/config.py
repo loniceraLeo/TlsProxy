@@ -1,15 +1,11 @@
 #! python3
-'''
-    Author: github.com/loniceraleo
-    TLS-Proxy will use a existing config file in the case of
-    finding it in this dictionary.Otherwise it creates a new one.
+''' Author: github.com/loniceraLeo
 '''
 
 import os
 import json
 import ssl
 from os import system as sys_call
-from hashlib import blake2b
 
 SERVER_SIDE = 0x0
 CLIENT_SIDE = 0x1
@@ -28,7 +24,8 @@ def get_config(*args) -> dict:
     return create_config(args[0])
 
 def set_config():
-    ''' reserve this method for future implementation'''
+    ''' reserve this method for future implementation
+    '''
     pass
 
 def read_config() -> dict:
@@ -39,7 +36,8 @@ def read_config() -> dict:
 
 def create_config(side: int) -> dict:
     ''' creates a new config.json file and save it in the
-        current dictionary '''
+        current dictionary 
+    '''
     config = {}
     config['server']          = input('server: ')
     config['port']            = input('port: ')
@@ -65,7 +63,8 @@ def generate_key_cert(key_file, cert_file, *, format: str=None) -> None:
     ''' if current os support, use openssl.
         if argument format is not specified, create a default
         private key and use it to generate a self-signed certificate.
-        it is recommended to use default format '''
+        it is recommended to use default format 
+    '''
     files = os.listdir()
     if key_file in files or cert_file in files:
         return 

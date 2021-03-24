@@ -1,5 +1,6 @@
 #! python3
-''' a set of useful utils '''
+''' Author: github.com/loniceraLeo
+'''
 
 '''
     TODO: random padding length

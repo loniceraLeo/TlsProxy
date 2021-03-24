@@ -9,9 +9,7 @@ def nop(*args, **kwargs):
 
 dic = {
     '-c': 'config',
-    '-s': 'server',
-    '-p': 'port',
-    '-'
+    '-g': 'generate',
     '-r': 'recursion_mode',
 }
 

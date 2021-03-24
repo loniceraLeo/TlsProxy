@@ -86,6 +86,7 @@ def handle_exception(loop, context):
 def entry():
     global conf, new_key, ctx
 
+    init()
     try:
         conf = config.get_config(SERVER_SIDE)
         new_key = hashed_key(conf['password'])

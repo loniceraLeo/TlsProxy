@@ -19,7 +19,6 @@ async def process_stream(rd: asyncio.StreamReader,
     padded_addr = padding(raw_addr, conf['padding-length'])
     addr, _ = mask(padded_addr, new_key)
 
-    print(raw_addr)
     try:
         rmt_rd, rmt_wt = await asyncio.open_connection(
             host=conf['server'], port=conf['port'],
@@ -33,6 +32,7 @@ async def process_stream(rd: asyncio.StreamReader,
 
     wt.write(b'HTTP/1.1 200 Connection Established\r\n\r\n')
     await wt.drain()
+
     await asyncio.gather(stream_copy(rd, rmt_wt), 
                             stream_copy(rmt_rd, wt),
                             return_exceptions=True)
@@ -58,17 +58,7 @@ async def stream_copy(reader: asyncio.StreamReader,
         except:
             return
 
-async def check_valid(reader: asyncio.StreamReader) -> bool:
-    ''' the server side create a recipe 
-        Deprecated: useless function.
-    '''
-    token = await reader.read(4096)
-    token, _ = mask(token, new_key)
-    if token == b'Connection Established':
-        return True
-    return False
-
-def destory_conns(conns: list):
+def close_conns(conns: list):
     for writer in conns:
         writer.transport.close()
 
@@ -92,9 +82,16 @@ async def main():
     async with server:
             await server.serve_forever()
 
+def init():
+    if not check_python_version(3, 7, 0):
+        raise ValueError('python version not support')
+
+    flags.parse()
+
 def entry():
     global new_key, ctx, conf, rmt_conns
 
+    init()
     try:
         conf = config.get_config(CLIENT_SIDE)
         new_key = hashed_key(conf['password'].encode())
@@ -110,7 +107,6 @@ def no_check(loop: asyncio.AbstractEventLoop):
     '''XXX not safe!
     we override a private method of event-loop to avoid raising exception
     after keyboardInterrupte.
-    consider constructing a sub-class of asyncio.AbstractEventLoop?
     '''
     loop._check_closed = nop
 

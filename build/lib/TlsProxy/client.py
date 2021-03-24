@@ -1,14 +1,11 @@
 #! python3
-''' Author: github.com/loniceraleo
-    client-side of TLS-Proxy 
-    warnning: python3.7+ needed '''
+''' Author: github.com/loniceraLeo
+'''
 
 import asyncio
-from os import write
-import socket
 import ssl
 
-from TlsProxy import config
+from TlsProxy import config, flags
 from TlsProxy.config import CLIENT_SIDE
 from TlsProxy.utils import *
 
@@ -22,7 +19,6 @@ async def process_stream(rd: asyncio.StreamReader,
     padded_addr = padding(raw_addr, conf['padding-length'])
     addr, _ = mask(padded_addr, new_key)
 
-    print(raw_addr)
     try:
         rmt_rd, rmt_wt = await asyncio.open_connection(
             host=conf['server'], port=conf['port'],
@@ -36,6 +32,7 @@ async def process_stream(rd: asyncio.StreamReader,
 
     wt.write(b'HTTP/1.1 200 Connection Established\r\n\r\n')
     await wt.drain()
+
     await asyncio.gather(stream_copy(rd, rmt_wt), 
                             stream_copy(rmt_rd, wt),
                             return_exceptions=True)
@@ -61,19 +58,9 @@ async def stream_copy(reader: asyncio.StreamReader,
         except:
             return
 
-async def check_valid(reader: asyncio.StreamReader) -> bool:
-    ''' the server side create a recipe 
-        Deprecated: useless function.
-    '''
-    token = await reader.read(4096)
-    token, _ = mask(token, new_key)
-    if token == b'Connection Established':
-        return True
-    return False
-
-def destory_conns(conns: list):
+def close_conns(conns: list):
     for writer in conns:
-        del writer.transport
+        writer.transport.close()
 
 async def main():
     global server
@@ -95,6 +82,12 @@ async def main():
     async with server:
             await server.serve_forever()
 
+def init():
+    if not check_python_version(3, 7, 0):
+        raise ValueError('python version not support')
+
+    flags.parse()
+
 def entry():
     global new_key, ctx, conf, rmt_conns
 
@@ -111,8 +104,8 @@ def entry():
 
 def no_check(loop: asyncio.AbstractEventLoop):
     '''XXX not safe!
-    we override a private method of event loop to avoid raising exception
-    consider constructing a sub-class of event-Loop?
+    we override a private method of event-loop to avoid raising exception
+    after keyboardInterrupte.
     '''
     loop._check_closed = nop
 
