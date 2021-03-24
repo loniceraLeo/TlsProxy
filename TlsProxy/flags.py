@@ -33,16 +33,33 @@ def parse() -> any:
                         argv[index+2])
                 except:
                     return None
+                exit()
             if dic[item] == 'r':
                 try:
                     conf = config.search_recursively(os.getcwd(),
                             argv[index+1])
                 except:
-                    raise
-                print(1)
+                    return
                 return conf
+            if dic[item] == 'h':
+                help_inf()
+
         except KeyError:
             continue
 
+def help_inf():
+    print('''
+Usage of TlsProxy:
+    tpclient/tpserver [flag] [filename] ...
+        
+    flag:
+        -c filename : use filename as config file
+        -g filename1 filename2 : generate a key and a self-signed 
+        certificate. Respectively named filename1 and filename2
+        -r filename : search filename in current directory recursively
+        -h : help information
+            
+    ''')
+
 if __name__ == '__main__':
-    parse()
+    help_inf()
