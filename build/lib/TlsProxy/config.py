@@ -99,7 +99,7 @@ def search_recursively(dir: str, filename: str) -> str:
     for file in files:
         if file == filename:
             with open(dir+'/'+file) as f:
-                data = f.read()
+                data = json.loads(f.read())
                 return data
         if is_dir(file):
             return search_recursively(dir+'/'+file, filename)

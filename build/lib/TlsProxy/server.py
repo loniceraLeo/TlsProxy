@@ -5,9 +5,9 @@
 import asyncio
 import ssl
 
-from TlsProxy import config, flags
-from TlsProxy.config import SERVER_SIDE
-from TlsProxy.utils import *
+import config, flags
+from config import SERVER_SIDE
+from utils import *
 
 def nop(*args, **kwargs):
     pass
@@ -75,20 +75,18 @@ def init():
     if not check_python_version(3, 7, 0):
         raise ValueError('python version not support')
 
-    global conf
+    global new_key, ctx, conf
     conf = flags.parse()
+    if conf is None:
+            conf = config.get_config(SERVER_SIDE)
+    new_key = hashed_key(conf['password'])
+    ctx = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
+    ctx.load_cert_chain(conf['certificate'], conf['private-key'])
 
 def entry():
     init()
 
-    global new_key, ctx
     try:
-        if conf is not None:
-            conf = config.get_config(SERVER_SIDE)
-        new_key = hashed_key(conf['password'])
-        ctx = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
-        ctx.load_cert_chain(conf['certificate'], conf['private-key'])
-
         asyncio.run(main())
     except KeyboardInterrupt:
         exit(1)

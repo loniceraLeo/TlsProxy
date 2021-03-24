@@ -5,9 +5,9 @@
 import asyncio
 import ssl
 
-import config, flags
-from config import SERVER_SIDE
-from utils import *
+from TlsProxy import config, flags
+from TlsProxy.config import SERVER_SIDE
+from TlsProxy.utils import *
 
 def nop(*args, **kwargs):
     pass
