@@ -93,7 +93,7 @@ def generate_key_cert(key_file, cert_file, *, format: str=None) -> None:
         sys_call('openssl req -new -x509 -days {0} -key {1} -out {2}'.\
             format(default_cert_format['last-time'],
             key_file, cert_file))
-
+            
 def search_recursively(dir: str) -> str:
     files = os.listdir(dir)
     for file_name in files:

@@ -40,8 +40,6 @@ async def stream_copy(reader: asyncio.StreamReader,
         while True:
             data, first = mask(await reader.read(8192), \
                         new_key, first)
-            if toggle:
-                print(data[:30])
             if data == b'':
                 if writer:
                     writer.close()
