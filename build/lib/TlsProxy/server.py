@@ -40,8 +40,6 @@ async def stream_copy(reader: asyncio.StreamReader,
         while True:
             data, first = mask(await reader.read(8192), \
                         new_key, first)
-            if toggle:
-                print(data[:30])
             if data == b'':
                 if writer:
                     writer.close()
@@ -81,11 +79,12 @@ def init():
 
 def handle_exception(loop, context):
     ''' TODO: implement a user-specified exception handler '''
-    print(context)
+    pass
 
 def entry():
     global conf, new_key, ctx
 
+    init()
     try:
         conf = config.get_config(SERVER_SIDE)
         new_key = hashed_key(conf['password'])

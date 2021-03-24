@@ -5,6 +5,7 @@
 import asyncio
 import ssl
 
+
 from TlsProxy import config, flags
 from TlsProxy.config import CLIENT_SIDE
 from TlsProxy.utils import *
@@ -91,6 +92,7 @@ def init():
 def entry():
     global new_key, ctx, conf, rmt_conns
 
+    init()
     try:
         conf = config.get_config(CLIENT_SIDE)
         new_key = hashed_key(conf['password'].encode())

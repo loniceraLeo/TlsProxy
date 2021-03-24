@@ -17,7 +17,7 @@ def get_config(*args) -> dict:
     files = os.listdir()
     for name in files:
         if name == 'config.json':
-            config = read_config()
+            config = read_config(name)
             if not 'private_key' in config and args[0] == SERVER_SIDE:
                 raise ValueError('not server config')
             return config
@@ -28,8 +28,8 @@ def set_config():
     '''
     pass
 
-def read_config() -> dict:
-    with open('./config.json', 'r') as f:
+def read_config(filename: str) -> dict:
+    with open('./'+filename, 'r') as f:
         marshalled_data = f.read()
         config = json.loads(marshalled_data)
     return config
@@ -94,15 +94,15 @@ def generate_key_cert(key_file, cert_file, *, format: str=None) -> None:
             format(default_cert_format['last-time'],
             key_file, cert_file))
 
-def search_recursively(dir: str) -> str:
+def search_recursively(dir: str, filename: str) -> str:
     files = os.listdir(dir)
-    for file_name in files:
-        if file_name == 'config.json':
-            with open(dir+'/'+file_name) as f:
+    for file in files:
+        if file == filename:
+            with open(dir+'/'+file) as f:
                 data = f.read()
                 return data
-        if is_dir(file_name):
-            return search_recursively(dir+'/'+file_name)
+        if is_dir(file):
+            return search_recursively(dir+'/'+file, filename)
     return None
 
 def is_dir(filename: str) -> bool:
