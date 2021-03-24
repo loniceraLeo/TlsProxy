@@ -50,6 +50,7 @@ def parse() -> any:
 
         except KeyError:
             continue
+    return None
 
 def help_inf():
     print('''

@@ -5,7 +5,7 @@
 import os
 import sys
 
-from TlsProxy import config
+import config
 
 def nop(*args, **kwargs):
     pass
@@ -25,7 +25,8 @@ def parse() -> any:
                 try:
                     conf = config.read_config(argv[index+1])
                 except:
-                    return None
+                    print('file not found')
+                    exit()
                 return conf
             if dic[item] == 'g':
                 try:
@@ -39,8 +40,6 @@ def parse() -> any:
                     conf = config.search_recursively(os.getcwd(),
                             argv[index+1])
                 except:
-                    return
-                if conf == None:
                     print('file not found')
                     exit()
                 return conf
@@ -50,6 +49,7 @@ def parse() -> any:
 
         except KeyError:
             continue
+    return None
 
 def help_inf():
     print('''
@@ -62,7 +62,6 @@ Usage of TlsProxy:
         certificate. Respectively named filename1 and filename2
         -r filename : search filename in current directory recursively
         -h : help information
-            
     ''')
 
 if __name__ == '__main__':
