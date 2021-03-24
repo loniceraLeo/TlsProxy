@@ -40,9 +40,13 @@ def parse() -> any:
                             argv[index+1])
                 except:
                     return
+                if conf == None:
+                    print('file not found')
+                    exit()
                 return conf
             if dic[item] == 'h':
                 help_inf()
+                exit()
 
         except KeyError:
             continue

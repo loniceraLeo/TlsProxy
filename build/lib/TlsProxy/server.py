@@ -75,18 +75,16 @@ def init():
     if not check_python_version(3, 7, 0):
         raise ValueError('python version not support')
 
-    flags.parse()
-
-def handle_exception(loop, context):
-    ''' TODO: implement a user-specified exception handler '''
-    pass
+    global conf
+    conf = flags.parse()
 
 def entry():
-    global conf, new_key, ctx
-
     init()
+
+    global new_key, ctx
     try:
-        conf = config.get_config(SERVER_SIDE)
+        if conf is not None:
+            conf = config.get_config(SERVER_SIDE)
         new_key = hashed_key(conf['password'])
         ctx = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
         ctx.load_cert_chain(conf['certificate'], conf['private-key'])

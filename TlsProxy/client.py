@@ -87,14 +87,16 @@ def init():
     if not check_python_version(3, 7, 0):
         raise ValueError('python version not support')
 
-    flags.parse()
+    global conf
+    conf = flags.parse()
 
 def entry():
-    global new_key, ctx, conf, rmt_conns
-
     init()
+    global new_key, ctx, rmt_conns
+
     try:
-        conf = config.get_config(CLIENT_SIDE)
+        if conf is not None:
+            conf = config.get_config(CLIENT_SIDE)
         new_key = hashed_key(conf['password'].encode())
         ctx = ssl.create_default_context(ssl.Purpose.SERVER_AUTH)
         ctx.check_hostname = False
