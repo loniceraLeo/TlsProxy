@@ -5,7 +5,7 @@ with open('./README.md', 'r', encoding='utf-8') as f:
 
 setup(
     name = 'TlsProxys',
-    version = '0.9.0',
+    version = '0.9.1',
     descriptor = 'a safe http proxy over tls',
     long_description_content_type = 'text/markdown',
     long_description = ld,
