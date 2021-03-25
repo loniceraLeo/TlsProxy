@@ -10,11 +10,14 @@ from TlsProxy import config
 def nop(*args, **kwargs):
     pass
 
+version = '0.8.0'
+
 dic = {
     '-c': 'c', 
     '-g': 'g',
     '-r': 'r',
-    '-h': 'h'
+    '-h': 'h',
+    '-v': 'v'
 }
 
 def parse() -> any:
@@ -46,6 +49,9 @@ def parse() -> any:
             if dic[item] == 'h':
                 help_inf()
                 exit()
+            if dic[item] == 'v':
+                print('TlsProxy {0}'.format(version))
+                exit()
 
         except KeyError:
             continue
@@ -62,6 +68,7 @@ Usage of TlsProxy:
         certificate. Respectively named filename1 and filename2
         -r filename : search filename in current directory recursively
         -h : help information
+        -v : version info
     ''')
 
 if __name__ == '__main__':
