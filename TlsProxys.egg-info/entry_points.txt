@@ -1,0 +1,4 @@
+[console_scripts]
+tpclient = TlsProxy.client:entry
+tpserver = TlsProxy.server:entry
+
