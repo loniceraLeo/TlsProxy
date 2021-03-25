@@ -62,6 +62,9 @@ async def main():
     host=conf['server'], port=conf['port'],
     ssl=ctx, ssl_handshake_timeout=30)
 
+    print('{0}:{1} is serving'.format(
+        conf['server'], conf['port']
+    ))
     '''XXX no event-loop exception warning.
     it will be optional in the future '''
     loop = asyncio.get_running_loop()

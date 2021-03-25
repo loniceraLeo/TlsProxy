@@ -1,11 +1,14 @@
 from setuptools import setup
 
+with open('./README.md', 'r', encoding='utf-8') as f:
+    ld = f.read()
+
 setup(
-    name = 'TlsProxy',
+    name = 'TlsProxys',
     version = '0.9.0',
     descriptor = 'a safe http proxy over tls',
     long_description_content_type = 'text/markdown',
-    long_description = 'README.md',
+    long_description = ld,
     author = 'github.com/loniceraLeo',
     url = 'https://www.github.com/loniceraLeo/TlsProxy',
     packages = ['TlsProxy'],
