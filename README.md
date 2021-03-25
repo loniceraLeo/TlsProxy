@@ -77,13 +77,13 @@ tpclient -g app.key app.crt
 ```
 
 TlsProxys会自动调用openssl, 按照提示输入信息。如果调用成功，本目录下会生成
-app.key, app.crt两个文件。
+`app.key`, `app.crt`两个文件。
 
-在本地，把app.crt导入浏览器根证书列表;把app.key和app.crt传输到远程服务器。
+在本地，把`app.crt`导入浏览器根证书列表;把`app.key`和`app.crt`传输到远程服务器。
 
 ### 启动服务
 
-在服务器上, cd到app.key和app.crt的目录下, 执行:
+在服务器上, cd到`app.key`和`app.crt`的目录下, 执行:
 
 ```console
 tpserver
@@ -111,7 +111,7 @@ tpclient
 server: 255.255.255.255  
 port: 8000  
 password: my_password  
-local_port: 8088  
+local_port: 8080  
 
 若解释器没有抛出异常, 命令行应该打印:  
 127.0.0.1:8080 is serving
