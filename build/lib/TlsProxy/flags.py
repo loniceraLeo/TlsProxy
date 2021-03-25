@@ -60,7 +60,7 @@ def parse() -> any:
 def help_inf():
     print('''
 Usage of TlsProxy:
-    tpclient/tpserver [flag] [filename] ...
+    tpclient/tpserver [command] [filename] ...
         
     flag:
         -c filename : use filename as config file

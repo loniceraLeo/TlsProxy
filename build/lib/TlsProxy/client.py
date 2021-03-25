@@ -69,7 +69,7 @@ async def main():
     server = await asyncio.start_server(process_stream,
         host=conf['local_host'], port=conf['local_port'])
     ''' TODO: use logging module in the future '''
-    print('{0}:{1} is on listening...'.format(
+    print('{0}:{1} is serving'.format(
         conf['local_host'], conf['local_port']
     ))
 

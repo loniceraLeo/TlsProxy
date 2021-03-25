@@ -22,11 +22,11 @@ $ tpclient [command] [filename] ...
 
 ### 命令行参数含义
 
--c : 手动指定配置文件
--g : 生成私钥-证书
--r : 递归文件搜索
--v : 版本信息
--h : 帮助信息
++ -c : 手动指定配置文件
++ -g : 生成私钥-证书
++ -r : 递归文件搜索
++ -v : 版本信息
++ -h : 帮助信息
 
 举例:
 
@@ -91,13 +91,13 @@ tpserver
 
 这会启动一个交互式的读取器, 输入示例如下:
 
-server: 255.255.255.255
-port: 8000
-password: my_password
-certificate: app.crt
-private-key: app.key
+server: 255.255.255.255  
+port: 8000  
+password: my_password  
+certificate: app.crt  
+private-key: app.key  
 
-若解释器没有抛出异常, 命令行应该打印:
+若解释器没有抛出异常, 命令行应该打印:  
 255.255.255.255:8000 is serving
 
 在本地, 执行:
@@ -108,16 +108,16 @@ tpclient
 
 在交互式读取器内输入:
 
-server: 255.255.255.255
-port: 8000
-password: my_password
-local_port: 8088
+server: 255.255.255.255  
+port: 8000  
+password: my_password  
+local_port: 8088  
 
-若解释器没有抛出异常, 命令行应该打印:
+若解释器没有抛出异常, 命令行应该打印:  
 127.0.0.1:8080 is serving
 
 最后修改浏览器代理配置:
-地址: 127.0.0.1
+地址: 127.0.0.1  
 端口: 8080
 
 Done.
