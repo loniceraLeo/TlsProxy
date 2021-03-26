@@ -36,7 +36,7 @@ $ tpclient [command] [filename] ...
 tpclient -c config.json
 ```
 
-生成 app.key app.crt 密钥-证书对:
+生成 app.key app.crt 私钥-证书对:
 
 ```console
 tpclient -g app.key app.crt
@@ -70,7 +70,7 @@ openssl version
 
 若打印版本信息，则openssl已经安装。
 
-TlsProxys使用Tls协议传输数据, 服务器上需要证书-私钥对, 首先在本地生成一个私钥，并用它生成自签名证书:
+TlsProxys使用Tls协议传输数据, 服务器上需要私钥-证书对, 首先在本地生成一个私钥，并用它生成自签名证书:
 
 ```console
 tpclient -g app.key app.crt
