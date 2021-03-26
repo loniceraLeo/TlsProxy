@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: TlsProxys
-Version: 1.0.0
+Version: 1.0.1
 Summary: a safe http proxy over tls
 Home-page: https://www.github.com/loniceraLeo/TlsProxy
 Author: github.com/loniceraLeo
@@ -16,7 +16,8 @@ Description: # TlsProxys
         ※ **需要python3.7+**
         
         ```console
-        python3.9 -m pip install TlsProxys
+        Unix: python3.9 -m pip install TlsProxys
+        windows: pip install TlsProxys
         ```
         
         ## 基本用法

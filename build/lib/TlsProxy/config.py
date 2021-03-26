@@ -84,11 +84,11 @@ def generate_key_cert(key_file, cert_file, *, format: str=None) -> None:
         ''' TODO: implement user-specified private key and certificate '''
         pass
     else:
-        sys_call('openssl genrsa -{0} -out {1} {2}'.format(\
+        sys_call('openssl genrsa -passout pass:foobar -{0} -out {1} {2}'.format(\
             default_key_format['cipher'], key_file, \
             default_key_format['length']))
         # no pass pharse:
-        sys_call('openssl rsa -in {0} -out {0}'.format(\
+        sys_call('openssl rsa -passin pass:foobar -in {0} -out {0}'.format(\
             key_file))
         sys_call('openssl req -new -x509 -days {0} -key {1} -out {2}'.\
             format(default_cert_format['last-time'],
@@ -112,5 +112,5 @@ def is_dir(filename: str) -> bool:
     return False
 
 if __name__ == '__main__':
-    #generate_key_cert('abc.key', 'abc.crt')
+    generate_key_cert('abc.key', 'abc.crt')
     nop()
