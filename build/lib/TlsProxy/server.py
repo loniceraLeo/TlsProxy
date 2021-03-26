@@ -92,7 +92,7 @@ def entry():
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
-        exit(1)
+        print('exit')
 
 def no_check(loop: asyncio.AbstractEventLoop):
     '''XXX not safe

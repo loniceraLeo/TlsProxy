@@ -35,7 +35,7 @@ def read_config(filename: str) -> dict:
     return config
 
 def create_config(side: int) -> dict:
-    ''' creates a new config.json file and save it in the
+    ''' creates a new config.json file and save it in
         current dictionary 
     '''
     config = {}
