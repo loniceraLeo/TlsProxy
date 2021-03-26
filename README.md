@@ -9,7 +9,8 @@
 ※ **需要python3.7+**
 
 ```console
-python3.9 -m pip install TlsProxys
+Unix: python3.9 -m pip install TlsProxys
+windows: pip install TlsProxys
 ```
 
 ## 基本用法
