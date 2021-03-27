@@ -5,6 +5,7 @@
 import os
 import json
 import ssl
+from os.path import isdir
 from os import system as sys_call
 
 SERVER_SIDE = 0x0
@@ -102,14 +103,9 @@ def search_recursively(dir: str, filename: str) -> str:
                 data = json.loads(f.read())
                 os.chdir(dir)
                 return data
-        if is_dir(file):
+        if isdir(file):
             return search_recursively(dir+'/'+file, filename)
     return None
-
-def is_dir(filename: str) -> bool:
-    if not '.' in filename:
-        return True
-    return False
 
 if __name__ == '__main__':
     generate_key_cert('abc.key', 'abc.crt')
