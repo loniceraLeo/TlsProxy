@@ -59,7 +59,7 @@ tpclient -r config.json
 
 本条目将给出一个比较完整的提示，一般用户可以参考本流程使用TlsProxys。
 
-在本节所有示例中，tpclient运行在本地 tpserver运行在服务器端。
+在本节所有示例中，tpclient运行在本地  tpserver运行在服务器端。
 
 ### 准备工作
 
