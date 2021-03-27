@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: TlsProxys
-Version: 1.0.1
+Version: 1.0.2
 Summary: a safe http proxy over tls
 Home-page: https://www.github.com/loniceraLeo/TlsProxy
 Author: github.com/loniceraLeo
