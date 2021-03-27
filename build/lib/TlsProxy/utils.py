@@ -28,7 +28,7 @@ def mask(payload: bytes, pwd: bytes, first=0) -> tuple:
     last = (len(data)+first) % len(pwd)
     return (data, last)
 
-def hashed_key(key: bytes, size=32) -> bytes:
+def hashed_key(key: bytes, size=64) -> bytes:
     ''' check https://www.blake2.net/ for more information '''
     return blake2b(key, digest_size=size).digest()
 

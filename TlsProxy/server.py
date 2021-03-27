@@ -19,6 +19,8 @@ async def process(rd: asyncio.StreamReader, wt: asyncio.StreamWriter):
     data = await rd.read(256)
     raw_adr, _ = mask(data, new_key)
     adr = extract_address(raw_adr)
+    if adr is None:
+        return
     host, port = adr.split(':')[0], \
                 int(adr.split(':')[1], 10)
     if not is_valid_address(host, port):
@@ -53,6 +55,8 @@ async def stream_copy(reader: asyncio.StreamReader,
 
 def extract_address(raw_data: bytes) -> str:
     length = raw_data[0]
+    if length < 12:
+        return None
     raw_address = raw_data[1:1+length]
     address = str(bytes(raw_address))[2:-1]
     return address

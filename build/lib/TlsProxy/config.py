@@ -73,12 +73,12 @@ def generate_key_cert(key_file, cert_file, *, format: str=None) -> None:
         o_v = ssl.OPENSSL_VERSION_INFO
     except:
         raise ValueError('openssl not support')
-    default_key_format = {
+    default_key_settings = {
         'cipher': 'aes256',
         'length': 2048,
         'no-pharse': True   # generate a private without pass pharse
     }
-    default_cert_format = {
+    default_cert_settings = {
         'last-time': 3650  # maximum
     }
     if format:  
@@ -86,13 +86,13 @@ def generate_key_cert(key_file, cert_file, *, format: str=None) -> None:
         pass
     else:
         sys_call('openssl genrsa -passout pass:foobar -{0} -out {1} {2}'.format(\
-            default_key_format['cipher'], key_file, \
-            default_key_format['length']))
+            default_key_settings['cipher'], key_file, \
+            default_key_settings['length']))
         # no pass pharse:
         sys_call('openssl rsa -passin pass:foobar -in {0} -out {0}'.format(\
             key_file))
         sys_call('openssl req -new -x509 -days {0} -key {1} -out {2}'.\
-            format(default_cert_format['last-time'],
+            format(default_cert_settings['last-time'],
             key_file, cert_file))
 
 def search_recursively(dir: str, filename: str) -> str:
