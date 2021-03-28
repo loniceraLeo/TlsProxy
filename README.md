@@ -16,10 +16,10 @@ windows: pip install TlsProxys
 ## 基本用法
 
 服务器端:
-$ tpserver [command] [filename1[, filename2]] ...
+$ tpserver [command] [filename1[, filename2]]
 
 客户端:
-$ tpclient [command] [filename1[, filename2]] ...
+$ tpclient [command] [filename1[, filename2]]
 
 ### 命令行参数含义
 
