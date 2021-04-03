@@ -9,6 +9,8 @@ from TlsProxy import config, flags
 from TlsProxy.config import SERVER_SIDE
 from TlsProxy.utils import *
 
+MIN_LENGTH = 12
+
 def nop(*args, **kwargs):
     pass
 
@@ -55,7 +57,7 @@ async def stream_copy(reader: asyncio.StreamReader,
 
 def extract_address(raw_data: bytes) -> str:
     length = raw_data[0]
-    if length < 12:
+    if length < MIN_LENGTH:
         return None
     raw_address = raw_data[1:1+length]
     address = str(bytes(raw_address))[2:-1]
