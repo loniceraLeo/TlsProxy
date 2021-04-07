@@ -38,7 +38,7 @@ async def process(rd: asyncio.StreamReader, wt: asyncio.StreamWriter):
                         stream_copy(rmt_rd, wt))        
 
 async def stream_copy(reader: asyncio.StreamReader, 
-    writer: asyncio.StreamWriter, toggle=False):
+    writer: asyncio.StreamWriter):
     first = 0
     try:
         while True:

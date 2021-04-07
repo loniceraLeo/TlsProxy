@@ -39,7 +39,7 @@ async def process_stream(rd: asyncio.StreamReader,
                             return_exceptions=True)
 
 async def stream_copy(reader: asyncio.StreamReader, 
-    writer: asyncio.StreamWriter, toggle=False):
+    writer: asyncio.StreamWriter):
     first = 0
     try:
         while True:
