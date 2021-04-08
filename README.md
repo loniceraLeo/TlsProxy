@@ -9,7 +9,7 @@
 ※ **需要python3.7+**
 
 ```console
-linux: sudo python3.9 -m pip install TlsProxys
+linux: sudo python3 -m pip install TlsProxys
 windows: pip install TlsProxys
 ```
 
