@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: TlsProxys
-Version: 1.0.3
+Version: 1.0.4
 Summary: a safe http proxy over tls
 Home-page: https://www.github.com/loniceraLeo/TlsProxy
 Author: github.com/loniceraLeo
@@ -16,17 +16,19 @@ Description: # TlsProxys
         ※ **需要python3.7+**
         
         ```console
-        linux: python3.9 -m pip install TlsProxys
+        linux: sudo python3 -m pip install TlsProxys
         windows: pip install TlsProxys
         ```
         
         ## 基本用法
         
         服务器端:
-        $ tpserver [command] [filename] ...
+        
+        $ tpserver [command] [filename1[, filename2]]
         
         客户端:
-        $ tpclient [command] [filename] ...
+        
+        $ tpclient [command] [filename1[, filename2]]
         
         ### 命令行参数含义
         

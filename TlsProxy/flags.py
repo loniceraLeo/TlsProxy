@@ -10,7 +10,7 @@ from TlsProxy import config
 def nop(*args, **kwargs):
     pass
 
-VERSION = '1.0.3'
+VERSION = '1.0.4'
 
 dic = {
     '-c': 'c', 
