@@ -9,6 +9,7 @@
 
 import random
 import sys
+import ssl
 from hashlib import blake2b, blake2s
 
 def nop(*args, **kwargs):
@@ -56,7 +57,7 @@ def padding(addr: bytes, padding_length: int) -> bytes:
     payload = bytearray(b'')
     payload.append(addr_length)
     payload.extend(addr)
-    pads = random.randbytes(padding_length-addr_length-1)
+    pads = ssl.RAND_bytes(padding_length-addr_length-1)
     payload.extend(pads)
     return payload
 
