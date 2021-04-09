@@ -10,7 +10,7 @@ from TlsProxy import config
 def nop(*args, **kwargs):
     pass
 
-VERSION = '1.0.4'
+VERSION = '1.0.5'
 
 dic = {
     '-c': 'c', 
@@ -52,11 +52,11 @@ def parse() -> any:
             if dic[item] == 'v':
                 print('TlsProxy {0}'.format(VERSION))
                 exit()
-
+            else:
+                help_inf()
+                exit()
         except KeyError:
             continue
-    help_inf()
-    exit()
 
 def help_inf():
     print('''
